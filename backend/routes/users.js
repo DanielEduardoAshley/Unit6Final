@@ -2,6 +2,15 @@ const express = require('express');
 const usersRouter = express.Router();
 
 
+
+// POST new user
+usersRouter.post('/', (req,res)=>{
+
+    res.status(200)
+    res.json('Posted user')
+
+})
+
 // GET all users
 usersRouter.get('/', (req,res)=>{
     res.status(200)
@@ -15,13 +24,7 @@ usersRouter.get('/:id', (req,res)=>{
     res.json(`hiUsersRouter with id ${id}`)
 })
 
-// POST new user
-usersRouter.post('/', (req,res)=>{
 
-    res.status(200)
-    res.json('Posted user')
-
-})
 
 
 module.exports = { usersRouter };
