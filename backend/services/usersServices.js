@@ -1,18 +1,21 @@
 const { db } = require('./dbconnection');
 const usersServices = {};
 
-usersServices.create=()=>{
-    return db.any()
+// POST new user
+usersServices.create=(username)=>{
+    return db.any('INSERT INTO users (username) VALUES ($[username])', {username})
 
 };
 
+// GET all users
 usersServices.read=()=>{
-    return db.any()
+    return db.any('Select * FROM users ')
 
 };
 
-usersServices.readOne=()=>{
-    return db.one()
+// GET single user
+usersServices.readOne=(user_id)=>{
+    return db.one('SELECT * FROM users WHERE user_id=$[user_id]', {user_id})
 };
 
 

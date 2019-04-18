@@ -4,8 +4,8 @@ const genresServices = {};
 
 
 // GET all genres
-genresServices.get=()=>{
-    return db.any()
+genresServices.get=(genre_name)=>{
+    return db.any('SELECT * FROM genres WHERE genre_name=$[genre_name]', {genre_name})
 };
 
 
