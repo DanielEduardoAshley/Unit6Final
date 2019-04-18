@@ -14,8 +14,8 @@ usersServices.read=()=>{
 };
 
 // GET single user
-usersServices.readOne=(user_id)=>{
-    return db.one('SELECT * FROM users WHERE user_id=$[user_id]', {user_id})
+usersServices.readOne=(id)=>{
+    return db.one('SELECT * FROM users WHERE id=$[id]', {id})
 };
 
 
