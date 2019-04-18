@@ -1,5 +1,7 @@
 const express = require('express');
 const commentsRouter = express.Router();
+const commentsServices = require('../services/commentsServices');
+
 
 // GET all comments for specific show_id
 commentsRouter.get('/:comment_id', (req, res)=>{
