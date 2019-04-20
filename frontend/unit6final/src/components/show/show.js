@@ -64,8 +64,9 @@ class Show extends React.Component{
                     <div className="card cardImg" style={{"width" : "18rem"}}>
                     <img src={`${this.state.showInfo[0].img_url}`} className="card-img-top" alt={`${this.state.showInfo[0].title} `}></img>
                     <h5>{`Currently Being Watched By ${this.state.showInfo[0].username}`}</h5>
+                    { !this.state.showInfo[0].comment_body?<h5>{`0 Comments`}</h5>:
                     <h5>{`${this.state.showInfo.length} Comments`}</h5>
-                
+                    }
                   <div className="card-body ">
                 {
                     this.state.showInfo.map((e,i)=>{
