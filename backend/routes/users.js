@@ -6,7 +6,9 @@ const usersServices = require('../services/usersServices');
 
 // POST new user
 usersRouter.post('/', (req,res)=>{
-    usersServices.create('SamTheMan')
+    const { username } = req.body
+    console.log(req.params)
+    usersServices.create(username)
     .then(()=>{
         console.log('success')
         res.status(200)

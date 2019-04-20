@@ -3,8 +3,6 @@ const genresRouter = express.Router();
 const genresServices = require('../services/genresServices');
 
 
-
-
 // GET all genres
 genresRouter.get('/',(req, res)=>{
     genresServices.read()
@@ -21,11 +19,6 @@ genresRouter.get('/',(req, res)=>{
 
     
 })
-
-
-
-
-
 
 
 
