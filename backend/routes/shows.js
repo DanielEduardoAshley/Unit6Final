@@ -92,7 +92,7 @@ showsRouter.get('/:show_id', (req,res)=>{
     const { show_id } = req.params
     showsServices.readByShowid(show_id)
     .then((response)=>{
-        console.log('SHOWS BY show id RESPONSE', response)
+        console.log('SHOWS Trying', response)
         res.status(200)
         res.json(response)
     })

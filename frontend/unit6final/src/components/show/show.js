@@ -69,8 +69,8 @@ class Show extends React.Component{
                   <div className="card-body ">
                 {
                     this.state.showInfo.map((e,i)=>{
-                      return(
-                         <p className="card-text" key={i}> {`${this.state.showInfo[(this.state.showInfo.length-1)-i].username} says ${this.state.showInfo[(this.state.showInfo.length-1)-i].comment_body}`} </p>        
+                      return( this.state.showInfo[(this.state.showInfo.length-1)-i].comment_body?
+                         <p className="card-text" key={i}> {`${this.state.showInfo[(this.state.showInfo.length-1)-i].username} says ${this.state.showInfo[(this.state.showInfo.length-1)-i].comment_body}`} </p> : null       
                         
                      )
                     })
