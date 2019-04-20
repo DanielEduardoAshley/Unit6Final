@@ -26,7 +26,7 @@ commentsRouter.get('/:comment_id', (req, res)=>{
     const { comment_id } = req.params
     commentsServices.read(comment_id)
     .then((response)=>{
-        console.log(response)
+        console.log('helloResponseOrder',response)
         res.status(200)
         res.json(response)
     })

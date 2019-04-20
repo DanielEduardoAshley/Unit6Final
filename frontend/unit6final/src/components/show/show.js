@@ -32,13 +32,27 @@ class Show extends React.Component{
         })
     }
     submitComment=()=>{
-        instance.post()
-        const {showInfo}=this.state
-        showInfo.unshift(this.state.newComments)
-        console.log(showInfo)
-        this.setState({
-            showInfo : showInfo,
+        const comment_body =this.state.newComments
+        const user_id = this.context.activeUser
+        console.log(user_id)
+        const show_id = this.props.match.params.id
+        instance.post('/comments', { comment_body,user_id,show_id })
+        .then(()=>{
+            console.log('success')
+            instance.get(`shows/${show_id}`)
+            .then((response)=>{
+                console.log('responseOrder',response.data)
+                this.setState({
+                    showInfo: response.data
+                })        
+            })
         })
+        // const {showInfo}=this.state
+        // showInfo.concat(this.state.newComments)
+        // console.log(showInfo)
+        // this.setState({
+        //     showInfo : showInfo,
+        // })
     }
     render(){
         console.log(this.state)
@@ -56,7 +70,7 @@ class Show extends React.Component{
                 {
                     this.state.showInfo.map((e,i)=>{
                       return(
-                         <p className="card-text" key={i}> {`${e.username} says ${e.comment_body}`} </p>        
+                         <p className="card-text" key={i}> {`${this.state.showInfo[(this.state.showInfo.length-1)-i].username} says ${this.state.showInfo[(this.state.showInfo.length-1)-i].comment_body}`} </p>        
                         
                      )
                     })
