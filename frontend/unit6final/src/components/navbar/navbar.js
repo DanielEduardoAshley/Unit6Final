@@ -21,14 +21,12 @@ const Navbar=()=>{
         <Link to='/users'className="nav-link" >Users</Link>
       </li>
       <li className="nav-item">
-        <Link to='/user/posts'className="nav-link" >Post</Link>
+        <Link to='/user/posts'className="nav-link" >Create</Link>
       </li>
       <li className="nav-item">
         <Link to="/shows" className="nav-link" >TV Shows</Link>
       </li>
-      <li className="nav-item">
-        <a className="nav-link" href="#">Genres</a>
-      </li>
+     
       <li className="nav-item dropdown">
         {/* <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Dropdown link
