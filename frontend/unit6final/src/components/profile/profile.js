@@ -29,7 +29,7 @@ class Profile extends React.Component{
                {
                 this.state.userProfile.map((e,i)=>{
                   return( 
-                <div className='moviediv'>
+                <div className='moviediv' key={i}>
                     <HashRouter>
                       <Link to={`/show/${e.shows_id}`}>
                         <img src={`${e.img_url}`}></img>

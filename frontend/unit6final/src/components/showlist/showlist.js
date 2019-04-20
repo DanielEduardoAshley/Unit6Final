@@ -1,22 +1,25 @@
 import React from 'react';
 import { HashRouter, Link } from 'react-router-dom';
-import './showlist.css';
 import instance from '../../services/axios';
 import axios from 'axios'
 import AuthContext from '../../contexts/auth';
-import 'bootstrap';
+// import 'bootstrap';
+import './showlist.css';
+
 
 
 class Showlist extends React.Component{
     state={
-        shows: []
+        shows: {},
+        userAndId:{},
     }
 
     componentDidMount(){
         instance.get('/shows')
         .then((response)=>{
-            console.log(response)
+            console.log('response',response)
             const obj={}
+            const userObj={}
             for(let i =0; i<response.data.length ; i++){
                 if(!obj[response.data[i].title]){
                   obj[response.data[i].title] = [].concat(response.data[i].username)
@@ -25,24 +28,46 @@ class Showlist extends React.Component{
                     obj[response.data[i].title] = (obj[response.data[i].title]).concat(response.data[i].username)
 
                 }
-                
+                if(!userObj[response.data[i].username]){
+                    userObj[response.data[i].username] = response.data[i].user_id
+
+                }
             }
-        return obj
+        return [obj, userObj]
 
         })
-        .then((showsObj)=>{
-            console.log(showsObj)
+        .then((Objs)=>{
             this.setState({
-                shows: showsObj
+                shows: Objs[0],
+                userAndId: Objs[1],
+
             })
         })
     }
 
     render(){
+        const showsKeys = Object.keys(this.state.shows)
         console.log(this.state)
         return(
             <>
-            <div className='headers'>MasterList of Shows</div>
+            <h1 className="master">Master List of Shows</h1>
+            <ul>
+                {
+                    showsKeys.map((e,i)=>{
+                        return( 
+                            <>
+                                <li className='keysList' key={i}>{`${e} is being watched by `}</li>
+                                {this.state.shows[e].map((e,i)=>{
+                                    return <Link to={`/user/${this.state.userAndId[e]}`} ><ul className='list' key={i}>{` ${e}`}</ul></Link>
+                                })}
+                                
+                            </>
+                        )
+                    })
+                    
+               
+                }
+            </ul>
             </>
         )
     }
