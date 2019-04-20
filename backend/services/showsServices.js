@@ -30,5 +30,9 @@ showsServices.readByShowid=(id)=>{
     return dbConn(dbUrl).any('SELECT shows.id AS shows_id, title, img_url,  username, genre_name, comment_body, comments.id AS comments_id FROM shows FULL OUTER JOIN comments ON shows.id=comments.show_id JOIN users ON users.id=shows.user_id JOIN genres ON shows.genre_id=genres.id WHERE shows.id=$[id] ORDER BY comments_id', {id})
 };
 
+//GET one show BY NAME
+showsServices.readByShowTitle=(title, user_id)=>{
+    return dbConn(dbUrl).any('SELECT * FROM shows WHERE title=$[title] AND user_id=$[user_id]', {title, user_id})
+};
 
 module.exports = showsServices

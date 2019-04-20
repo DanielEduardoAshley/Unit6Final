@@ -87,7 +87,7 @@ showsRouter.get('/user/:user_id',(req,res)=>{
 
 })
 
-// GET one show
+// GET one show by id
 showsRouter.get('/:show_id', (req,res)=>{
     const { show_id } = req.params
     showsServices.readByShowid(show_id)
@@ -103,7 +103,21 @@ showsRouter.get('/:show_id', (req,res)=>{
     
 })
 
-
+// GET one show by title and user_id
+showsRouter.get('/:title/user/:user_id', (req,res)=>{
+    const { title, user_id } = req.params
+    showsServices.readByShowTitle(title, user_id)
+    .then((response)=>{
+        console.log('SHOWS Trying', response)
+        res.status(200)
+        res.json(response)
+    })
+    .catch(err=>{
+        console.log('Something went wrong in get show by show id route', err)
+        res.json('Something went wrong in get show by show id route')
+    })
+    
+})
 
 
 
