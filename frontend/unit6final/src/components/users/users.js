@@ -7,10 +7,12 @@ import AuthContext from '../../contexts/auth';
 class Users extends React.Component{
 
     state={
-        users:[]
+        users:[],
+        activeUsers: {},
     }
-
+    static contextType = AuthContext
     componentDidMount(){
+        console.log(this.props)
         instance.get('/users')
         .then((response)=>{
             console.log('response', response)
@@ -19,9 +21,12 @@ class Users extends React.Component{
             })
         })
         
+        
     }
 
+   
     render(){
+        console.log(this.state)
         return(
         <>
            
@@ -29,16 +34,16 @@ class Users extends React.Component{
             {
                 (appState)=>{
                     if(appState.users){
-                        console.log(appState.users)
+                        console.log('appState',appState)
                         return(<>
-                            <h4>{`Welcome ${appState.users.data[0].username}`}</h4>
-                            <h2>{`Your user id is ${appState.users.data[0].id}`}</h2>
+                            <h4>{`Welcome ${appState.activeUser.username}`}</h4>
+                            <h2>{`Your user id is ${appState.activeUser.id}`}</h2>
                             <h1>Master List of All Users</h1>
                             <ul>         
                             {
                                 this.state.users.map((e,i)=>{
-                                  return <><div key={i}><button className="login" >Log In</button>
-                                                <HashRouter><Link to={`/user/${e.id}`}><li className="login">{`${e.username}`}</li></Link></HashRouter>
+                                  return <><div key={i}><button className="login" onClick={event=>this.props.login(e.id)}>Log In</button>
+                                                <HashRouter><Link to={`/user/${e.id}`} key={i}><li className="login">{`${e.username}`}</li></Link></HashRouter>
                                             </div><br></br>
                                         </>
                                 })

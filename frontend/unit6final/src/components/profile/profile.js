@@ -2,7 +2,6 @@ import React from 'react';
 import { HashRouter, Link } from 'react-router-dom';
 import './profile.css';
 import instance from '../../services/axios';
-import AuthContext from '../../contexts/auth';
 
 class Profile extends React.Component{
     state={
@@ -31,8 +30,8 @@ class Profile extends React.Component{
                   return( 
                 <div className='moviediv' key={i}>
                     <HashRouter>
-                      <Link to={`/show/${e.shows_id}`}>
-                        <img src={`${e.img_url}`}></img>
+                      <Link to={`/show/${e.shows_id}`} key={i}>
+                        <img src={`${e.img_url}`} alt={`${e.title}`}></img>
                         <span>{e.title}</span>
                         <span className='space'>{e.genre_name}</span>
                       </Link>

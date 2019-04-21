@@ -20,14 +20,16 @@ class App extends Component {
  
   state={
     users: '',
-    activeUser:1,
+    activeUser: {},
   }
 
   componentDidMount(){
       instance.get('/users')
       .then((response)=>{
         this.setState({
-          users : response
+          users : response,
+          activeUser : {id:1 ,username : 'Jon Snow'}
+
         })
       })
         .catch(err=>{
@@ -38,13 +40,20 @@ class App extends Component {
   }
 
   selectActiveUser=(id)=>{
-      const { activeUser } = this.state
-      activeUser = id
-      this.setState({
-        activeUser : activeUser
-      })
+      let userNow = this.state.activeUser
+      console.log(id)
+      userNow = id
+      instance.get(`/users/${userNow}`)
+        .then((response)=>{
+            this.setState({
+                activeUser: response.data,
+            })
+        })
+     
   }
+
   render(){
+    console.log(this.state)
     return (
       <HashRouter>
         <Route path='/' component={ Navbar }></Route>
@@ -56,7 +65,6 @@ class App extends Component {
            <Route path='/user/:id' exact component={ Profile }></Route>
            <Route path='/show/:id'  exact component={ Show }></Route>
            <Route path='/shows'  exact component={ Showlist }></Route>
-
          </Switch>
         </AuthContext.Provider>
       </HashRouter>

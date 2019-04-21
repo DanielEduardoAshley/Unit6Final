@@ -1,8 +1,6 @@
 import React from 'react';
-import { HashRouter, Link } from 'react-router-dom';
 import './show.css';
 import instance from '../../services/axios';
-import axios from 'axios'
 import AuthContext from '../../contexts/auth';
 import 'bootstrap';
 
@@ -33,7 +31,7 @@ class Show extends React.Component{
     }
     submitComment=()=>{
         const comment_body =this.state.newComments
-        const user_id = this.context.activeUser
+        const user_id = this.context.activeUser.id
         console.log(user_id)
         const show_id = this.props.match.params.id
         instance.post('/comments', { comment_body,user_id,show_id })
@@ -47,12 +45,7 @@ class Show extends React.Component{
                 })        
             })
         })
-        // const {showInfo}=this.state
-        // showInfo.concat(this.state.newComments)
-        // console.log(showInfo)
-        // this.setState({
-        //     showInfo : showInfo,
-        // })
+       
     }
     render(){
         console.log(this.state)
@@ -70,6 +63,7 @@ class Show extends React.Component{
                   <div className="card-body ">
                 {
                     this.state.showInfo.map((e,i)=>{
+                        console.log('here')
                       return( this.state.showInfo[(this.state.showInfo.length-1)-i].comment_body?
                          <p className="card-text" key={i}> {`${this.state.showInfo[(this.state.showInfo.length-1)-i].username} says ${this.state.showInfo[(this.state.showInfo.length-1)-i].comment_body}`} </p> : null       
                         

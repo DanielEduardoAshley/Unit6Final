@@ -1,8 +1,6 @@
 import React from 'react';
-import { HashRouter, Link } from 'react-router-dom';
 import './postprofile.css';
 import instance from '../../services/axios';
-import axios from 'axios'
 import AuthContext from '../../contexts/auth';
 import 'bootstrap';
 
@@ -64,7 +62,7 @@ class PostProfile extends React.Component{
 
     render(){
         console.log(this.state)
-        const userId = !this.context.users.data?'':this.context.activeUser
+        const userId = !this.context.users.data?'':this.context.activeUser.id
         return(
           <>
           <div className='forms'>
@@ -74,7 +72,7 @@ class PostProfile extends React.Component{
             <div className="dropdown-menu">
             {
                 this.state.genres.map((e,i)=>{
-                  return  <a className="dropdown-item"  key={i} onClick={_=>this.genreSelect(`${e.id}`)}>{e.genre_name} </a>
+                  return  <div className="dropdown-item"  key={i} onClick={_=>this.genreSelect(`${e.id}`)}>{e.genre_name} </div>
 
 
             })}

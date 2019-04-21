@@ -1,9 +1,6 @@
 import React from 'react';
-import { HashRouter, Link } from 'react-router-dom';
+import {  Link } from 'react-router-dom';
 import instance from '../../services/axios';
-import axios from 'axios'
-import AuthContext from '../../contexts/auth';
-// import 'bootstrap';
 import './showlist.css';
 
 
@@ -58,14 +55,12 @@ class Showlist extends React.Component{
                             <>
                                 <li className='keysList' key={i}>{`${e} is being watched by `}</li>
                                 {this.state.shows[e].map((e,i)=>{
-                                    return <Link to={`/user/${this.state.userAndId[e]}`} ><ul className='list' key={i}>{` ${e}`}</ul></Link>
+                                    return <Link to={`/user/${this.state.userAndId[e]}`} key={i} ><ul className='list' >{` ${e}`}</ul></Link>
                                 })}
                                 
                             </>
                         )
-                    })
-                    
-               
+                    })   
                 }
             </ul>
             </>
