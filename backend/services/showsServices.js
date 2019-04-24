@@ -27,7 +27,7 @@ showsServices.readByUserid=(user_id)=>{
 
 // GET one show
 showsServices.readByShowid=(id)=>{
-    return dbConn(dbUrl).any('SELECT shows.id AS shows_id, title, img_url,  username, genre_name, comment_body, comments.id AS comments_id FROM shows FULL OUTER JOIN comments ON shows.id=comments.show_id JOIN users ON users.id=shows.user_id JOIN genres ON shows.genre_id=genres.id WHERE shows.id=$[id] ORDER BY comments_id', {id})
+    return dbConn(dbUrl).any('SELECT shows.id AS shows_id, title, img_url,  username, genre_name, comment_body,comments.user_id AS comments_user_id, comments.id AS comments_id FROM shows FULL OUTER JOIN comments ON shows.id=comments.show_id JOIN users ON users.id=shows.user_id JOIN genres ON shows.genre_id=genres.id WHERE shows.id=$[id] ORDER BY comments_id', {id})
 };
 
 //GET one show BY NAME

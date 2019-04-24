@@ -40,10 +40,12 @@ class PostProfile extends React.Component{
         const title = this.state.movie_title
         const img_url = this.state.movie_url
         const genre_id = this.state.selectedGenreId
-        const user_id = this.context.activeUser
+        const user_id = this.context.activeUser.id
         console.log('Params', title,img_url,user_id,genre_id)
+        console.log(user_id)
         instance.get(`http://localhost:3300/shows/${title}/user/${user_id}`)
         .then((response)=>{
+            console.log(response)
             if(response.data.length===0){
                 console.log('No movie currently exists')
                 instance.post('http://localhost:3300/shows', { title, img_url, user_id, genre_id})
